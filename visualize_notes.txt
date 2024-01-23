@@ -1,0 +1,104 @@
+#### visualize testing ####
+
+# from SNPbinner2/sample_files/test_run_outputs within snpbin2 conda env
+
+snpbinner visualize --out . --bins ../bins_out.csv --crosspoints ../crosspoints_out.csv --snps ../crosspoints_in.tsv
+
+(snpbin2) andrewblock@EDMLOANC02W4D3NHTD6 test_run_outputs % snpbinner visualize --out . --bins ../bins_out.csv --crosspoints ../crosspoints_out.csv --snps ../crosspoints_in.tsv
+Saving ./   RIL_1.png... Done.
+Saving ./   RIL_2.png... Done.
+Saving ./   RIL_3.png... Done.
+Saving ./   RIL_4.png... Done.
+Saving ./   RIL_5.png... Done.
+Saving ./   RIL_6.png... Done.
+Saving ./   RIL_7.png... Done.
+Saving ./   RIL_10.png... Done.
+Saving ./   RIL_11.png... Done.
+Saving ./   RIL_12.png... Done.
+Saving ./   RIL_13.png... Done.
+Saving ./   RIL_14.png... Done.
+Saving ./   RIL_16.png... Done.
+Saving ./   RIL_18.png... Done.
+Saving ./   RIL_19.png... Done.
+Saving ./   RIL_20.png... Done.
+Saving ./   RIL_21.png... Done.
+Saving ./   RIL_22.png... Done.
+Saving ./   RIL_23.png... Done.
+Saving ./   RIL_24.png... Done.
+Saving ./   RIL_25.png... Done.
+Saving ./   RIL_26.png... Done.
+Saving ./   RIL_27.png... Done.
+Saving ./   RIL_28.png... Done.
+Saving ./   RIL_30.png... Done.
+Saving ./   RIL_31.png... Done.
+Saving ./   RIL_32.png... Done.
+Saving ./   RIL_33.png... Done.
+Saving ./   RIL_34.png... Done.
+Saving ./   RIL_35.png... Done.
+Saving ./   RIL_37.png... Done.
+Saving ./   RIL_38.png... Done.
+Saving ./   RIL_39.png... Done.
+Saving ./   RIL_40.png... Done.
+Saving ./   RIL_41.png... Done.
+Saving ./   RIL_43.png... Done.
+Saving ./   RIL_45.png... Done.
+Saving ./   RIL_46.png... Done.
+Saving ./   RIL_47.png... Done.
+Saving ./   RIL_48.png... Done.
+Saving ./   RIL_49.png... Done.
+Saving ./   RIL_50.png... Done.
+
+# now my folder is full of .pngs
+
+#### visualize3 ####
+
+# from SNPbinner3/sample_files/test_outputs/ and within conda env snpbin3
+
+python ~/Documents/GitHub/SNPbinner3/snpbinner3 visualize --out . --bins ../bins_out.csv --crosspoints ../crosspoints_out.csv --snps ../crosspoints_in.tsv
+
+(snpbin3) andrewblock@EDMLOANC02W4D3NHTD6 test_outputs % python ~/Documents/GitHub/SNPbinner3/snpbinner3 visualize --out . --bins ../bins_out.csv --crosspoints ../crosspoints_out.csv --snps ../crosspoints_in.tsv
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/__main__.py", line 27, in <module>
+    main()
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/__main__.py", line 24, in main
+    program_run_dict[program_to_run](**arg_dict_to_pass)
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/visualize.py", line 155, in visualize
+    builder.add_row(*row)
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/visualize.py", line 198, in add_row
+    self.row_list[row_name] = [_val_to_color(x) for x in row_col_cols]
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/visualize.py", line 198, in <listcomp>
+    self.row_list[row_name] = [_val_to_color(x) for x in row_col_cols]
+                               ^^^^^^^^^^^^^^^^
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/visualize.py", line 179, in _val_to_color
+    return _rgba_hex_val(*[int(i*ratio+j*(1-ratio)) for i,j in zip(genotype_colors["b"],genotype_colors["h"])])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/visualize.py", line 166, in _rgba_hex_val
+    def _rgba_hex_val(r,g,b,a=255): return reduce(lambda x,y:(x<<8)|y,(a,b,g,r),0)
+                                           ^^^^^^
+NameError: name 'reduce' is not defined
+
+# I think this function is coming from package functools which maybe isn't loaded?
+# added import functools to bottom on libraries section but didn't change error
+# changed reduce to functools.reduce in line 166
+# new error!
+
+(snpbin3) andrewblock@EDMLOANC02W4D3NHTD6 test_outputs % python ~/Documents/GitHub/SNPbinner3/snpbinner3 visualize --out . --bins ../bins_out.csv --crosspoints ../crosspoints_out.csv --snps ../crosspoints_in.tsv
+Saving ./   RIL_1.png...Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/__main__.py", line 27, in <module>
+    main()
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/__main__.py", line 24, in main
+    program_run_dict[program_to_run](**arg_dict_to_pass)
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/visualize.py", line 161, in visualize
+    builder.save(out_folder+builder.name+".png")
+  File "/Users/andrewblock/Documents/GitHub/SNPbinner3/snpbinner3/visualize.py", line 224, in save
+    lw,lh = font.getsize(row_name)
+            ^^^^^^^^^^^^
+AttributeError: 'FreeTypeFont' object has no attribute 'getsize'
+
+# stackoverflow says this is due to Pillow updates and the functions have changed
+
